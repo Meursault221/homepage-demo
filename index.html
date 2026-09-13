@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>许廷伟 · 个人主页</title>
+<meta name="description" content="许廷伟的个人主页 —— 复旦大学保险专业硕士在读，本科毕业于上海财经大学税收学专业。">
+<!-- 上线后可以把下面两行取消注释，换成你的域名，链接分享出去才有缩略图 -->
+<!-- <meta property="og:title" content="许廷伟 · 个人主页"> -->
+<!-- <meta property="og:description" content="复旦大学保险专业硕士在读，本科毕业于上海财经大学税收学专业。"> -->
+<!-- <meta property="og:image" content="https://你的域名/og.png"> -->
+<meta property="og:type" content="website">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg:        #ffffff;
+    --bg-side:   #f7f7f8;
+    --fg:        #17181a;
+    --fg-muted:  #6b7280;
+    --border:    #e6e7ea;
+    --accent:    #4f46e5;
+    --accent-bg: #eef2ff;
+    --sidebar-w: 280px;
+  }
+
+  /* 跟随系统深色模式，不需要就删掉这一整段 */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #101114;
+      --bg-side:   #17181c;
+      --fg:        #e9e9ec;
+      --fg-muted:  #9ca3af;
+      --border:    #2a2c33;
+      --accent:    #9a9bf8;
+      --accent-bg: #21223a;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent-bg); color: var(--accent); }
+
+  a { color: var(--accent); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ---------- 布局 ---------- */
+  .layout { display: flex; min-height: 100vh; }
+
+  /* ---------- 左侧栏 ---------- */
+  .sidebar {
+    flex: 0 0 var(--sidebar-w);
+    width: var(--sidebar-w);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    padding: 52px 30px 34px;
+    background: var(--bg-side);
+    border-right: 1px solid var(--border);
+  }
+
+  .profile { display: flex; flex-direction: column; gap: 14px; }
+
+  .avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    user-select: none;
+  }
+  /* 用真实头像时把下面的 <div class="avatar"> 换成：
+     <img class="avatar" src="avatar.jpg" alt="许廷伟">  这片样式会自动生效 */
+  img.avatar { object-fit: cover; display: block; }
+
+  .name { margin: 0; font-size: 21px; font-weight: 650; letter-spacing: 0.01em; }
+  .tagline { margin: 0; font-size: 14px; color: var(--fg-muted); }
+
+  /* ---------- 导航 ---------- */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-left: 1px solid var(--border);
+  }
+
+  .nav-link {
+    padding: 7px 0 7px 18px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--fg-muted);
+    font-size: 15px;
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .nav-link:hover { color: var(--fg); }
+  .nav-link.is-active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 550;
+  }
+
+  /* ---------- 侧栏底部链接 ---------- */
+  /* 用不到就整段删掉 */
+  .social {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13.5px;
+  }
+  .social a {
+    color: var(--fg-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .social a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- 右侧内容 ---------- */
+  .content {
+    flex: 1;
+    min-width: 0;
+    max-width: 880px;
+    padding: 76px 60px 72px;
+  }
+
+  section { scroll-margin-top: 32px; }
+  section + section { margin-top: 76px; }
+
+  .section-title {
+    margin: 0 0 26px;
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: 0.01em;
+  }
+
+  .prose p { margin: 0 0 18px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { font-weight: 620; }
+
+  /* ---------- 经历条目（教育 / 实习共用） ---------- */
+  .entries { margin: 0; padding: 0; list-style: none; }
+
+  .entry { padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .entry:first-child { padding-top: 0; }
+  .entry:last-child { padding-bottom: 0; border-bottom: none; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .entry-org { margin: 0; font-size: 16px; font-weight: 620; letter-spacing: 0.01em; }
+
+  .entry-date {
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .entry-role { margin: 3px 0 0; font-size: 14.5px; color: var(--fg-muted); }
+
+  .entry-desc { margin: 12px 0 0; font-size: 15px; color: var(--fg-muted); }
+  .entry-desc ul { margin: 0; padding-left: 20px; }
+  .entry-desc li + li { margin-top: 5px; }
+
+  /* ---------- 技能 ---------- */
+  .skill-group + .skill-group { margin-top: 30px; }
+
+  .skill-group h3 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-side);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* ---------- 页脚 ---------- */
+  .foot {
+    margin-top: 88px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--fg-muted);
+  }
+
+  /* ---------- 窄屏：侧栏变顶栏 ---------- */
+  @media (max-width: 860px) {
+    .layout { flex-direction: column; }
+
+    .sidebar {
+      flex: none;
+      width: auto;
+      height: auto;
+      position: static;
+      gap: 26px;
+      padding: 36px 24px 0;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile { flex-direction: row; align-items: center; gap: 18px; }
+    .avatar { width: 64px; height: 64px; font-size: 25px; flex: none; }
+
+    .nav {
+      flex-direction: row;
+      gap: 6px;
+      border-left: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      padding: 9px 14px;
+      margin-left: 0;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+    .nav-link.is-active { border-left-color: transparent; border-bottom-color: var(--accent); }
+
+    .social { margin-top: 0; padding-bottom: 22px; }
+
+    .content { padding: 44px 24px 56px; }
+    section + section { margin-top: 56px; }
+  }
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+  <!-- ======================= 左侧栏 ======================= -->
+  <aside class="sidebar">
+    <div class="profile">
+      <div class="avatar" aria-hidden="true">许</div>
+      <div>
+        <h1 class="name">许廷伟</h1>
+        <p class="tagline">复旦大学 · 保险专硕研一</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="页面导航">
+      <a class="nav-link is-active" href="#about">关于我</a>
+      <a class="nav-link" href="#education">教育背景</a>
+      <a class="nav-link" href="#experience">实习经历</a>
+      <a class="nav-link" href="#skills">技能</a>
+    </nav>
+
+    <!-- 不需要联系方式就删掉这个 div -->
+    <div class="social">
+      <a href="mailto:nelsonlie21@163.com">邮箱</a>
+      <!-- 有领英就取消注释填上地址；没有就别加，坏链接比没有更难看
+      <a href="https://www.linkedin.com/in/你的ID" target="_blank" rel="noopener">领英</a> -->
+    </div>
+  </aside>
+
+  <!-- ======================= 右侧内容 ======================= -->
+  <main class="content">
+
+    <section id="about">
+      <h2 class="section-title">关于我</h2>
+      <div class="prose">
+        <p>
+          我是许廷伟，<strong>复旦大学</strong>保险专业硕士在读（研一），
+          本科毕业于<strong>上海财经大学</strong>税收学专业。从税收读到保险，
+          方向一直落在金融这条线上。
+        </p>
+        <p>
+          本科到现在攒了四段实习，横跨公共部门、互联网和四大 ——
+          在税务局待过，也在 Shopee 做过数字产品、在得物做过战略分析、在安永做过审计。
+          接触过的业务类型比较杂，好处是看一个项目时，合规、产品、战略、财务这几层都能搭上话。
+        </p>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title">教育背景</h2>
+      <ol class="entries">
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">复旦大学</h3>
+            <span class="entry-date">2026.09 – 2028.06</span>
+          </div>
+          <p class="entry-role">保险 · 专业硕士</p>
+          <!-- 想写研究方向、核心课程、GPA 就加一行：
+          <p class="entry-desc">研究方向：……</p> -->
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">上海财经大学</h3>
+            <span class="entry-date">2022.09 – 2026.06</span>
+          </div>
+          <p class="entry-role">税收学 · 本科</p>
+        </li>
+
+      </ol>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-title">实习经历</h2>
+      <!-- ⚠️ 下面四条的时间是我推测填的，描述是按岗位常见职责写的草稿。
+           发布前请逐条核对：时间改成真实的、描述改掉你没做过的事。 -->
+
+      <ol class="entries">
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">得物</h3>
+            <span class="entry-date">2026.01 – 2026.05</span>
+          </div>
+          <p class="entry-role">战略分析实习生</p>
+          <p class="entry-desc">
+            围绕平台重点品类做行业与竞对研究，追踪头部玩家的动作与打法，
+            产出专题分析材料供业务侧参考；配合整理经营数据，支持阶段性复盘。
+          </p>
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">Shopee</h3>
+            <span class="entry-date">2025.07 – 2025.09</span>
+          </div>
+          <p class="entry-role">数字产品实习生</p>
+          <p class="entry-desc">
+            参与功能需求梳理，输出竞品调研与对比文档，为方案设计提供依据；
+            跟进功能上线后的数据表现，汇总用户反馈并形成周期性小结。
+          </p>
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">安永（EY）</h3>
+            <span class="entry-date">2025.01 – 2025.03</span>
+          </div>
+          <p class="entry-role">审计实习生</p>
+          <p class="entry-desc">
+            参与年报审计项目，负责函证收发与回收情况统计，协助抽凭、
+            控制测试与底稿整理等基础程序，配合完成现场工作。
+          </p>
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3 class="entry-org">税务局</h3>
+            <span class="entry-date">2023.07 – 2023.08</span>
+          </div>
+          <p class="entry-role">实习生</p>
+          <p class="entry-desc">
+            协助处理纳税服务日常事务，包括资料受理与归档、系统数据录入，
+            参与税收政策宣传材料的整理与发放。
+          </p>
+        </li>
+
+      </ol>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">技能</h2>
+
+      <div class="skill-group">
+        <h3>工具与技能</h3>
+        <ul class="tags">
+          <li>SQL</li>
+          <li>Excel</li>
+          <li>Word</li>
+          <li>PowerPoint</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>语言</h3>
+        <ul class="tags">
+          <li>英语 · CET-6</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="foot">
+      © <span id="year">2026</span> 许廷伟 · 由 GitHub Pages 托管
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // 年份自动更新
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 滚动时高亮左侧对应导航项
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+    var sections = links
+      .map(function (l) { return document.querySelector(l.getAttribute('href')); })
+      .filter(Boolean);
+
+    if (!sections.length) return;
+
+    function setActive(id) {
+      links.forEach(function (l) {
+        var on = l.getAttribute('href') === '#' + id;
+        l.classList.toggle('is-active', on);
+        if (on) l.setAttribute('aria-current', 'true');
+        else l.removeAttribute('aria-current');
+      });
+    }
+
+    function update() {
+      var current = sections[0].id;
+      sections.forEach(function (s) {
+        if (s.getBoundingClientRect().top <= 140) current = s.id;
+      });
+      setActive(current);
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { update(); ticking = false; });
+    }, { passive: true });
+
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+</body>
+</html>
